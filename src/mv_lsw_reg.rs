@@ -526,15 +526,18 @@ fn test_write()
 }
 #[macro_export]
 macro_rules! mdio_read {
-    ($func:ident, $dev:expr, $reg:expr, $t:ty) => (
-        <$t>::try_from($func($dev as u16,$reg as u16))
+    ($func:ident, $dev:expr, $reg:expr, $t:ty, &mut $ret:ident) => (
+        {
+            let retv = $func($dev as u16,$reg as u16, &mut $ret);
+            <$t>::try_from(retv)
+        }
     );
 }
 #[macro_export]
 macro_rules! mdio_read_swap {
-    ($func:ident, $dev:expr, $reg:expr, $t:ty) => (
+    ($func:ident, $dev:expr, $reg:expr, $t:ty, &mut $ret:ident) => (
         {
-            let mut ret = $func($dev as u16,$reg as u16);
+            let mut ret = $func($dev as u16,$reg as u16, &mut $ret);
             //swap ret
             if cfg!(target_endian = "big") {
                 ret = ret.to_le()
@@ -549,18 +552,22 @@ macro_rules! mdio_read_swap {
 #[test]
 fn test_read_swap()
 {
-    fn a_read(dev:u16, reg:u16 )->u16 {
+    fn a_read(dev:u16, reg:u16, ret:&mut i32 )->u16 {
+        *ret=0;
         dev+reg 
     }
-    let ret = mdio_read_swap![a_read, 1, 2, mv_6390_PORT_0x08];
+    let mut ret=-1i32;
+    let ret = mdio_read_swap![a_read, 1, 2, mv_6390_PORT_0x08, &mut ret];
     println!("ret={:?}",ret);
 }
 #[test]
 fn test_read()
 {
-    fn a_read(dev:u16, reg:u16 )->u16 {
+    fn a_read(dev:u16, reg:u16, ret:& mut i32)->u16 {
+        *ret=-1;
         dev+reg 
     }
-    let ret = mdio_read![a_read, 1, 2, mv_6390_PORT_0x08];
-    println!("ret={:?}",ret);
+    let mut ret=0i32;
+    let retv = mdio_read![a_read, 1, 2, mv_6390_PORT_0x08, &mut ret];
+    println!("ret={:?},{}",retv, ret);
 }
