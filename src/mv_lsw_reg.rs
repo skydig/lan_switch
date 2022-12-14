@@ -557,8 +557,8 @@ fn test_read_swap()
         dev+reg 
     }
     let mut ret=-1i32;
-    let ret = mdio_read_swap![a_read, 1, 2, mv_6390_PORT_0x08, &mut ret];
-    println!("ret={:?}",ret);
+    let retv = mdio_read_swap![a_read, 1, 2, mv_6390_PORT_0x08, &mut ret];
+    println!("ret={:?},{}",retv, ret);
 }
 #[test]
 fn test_read()
