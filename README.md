@@ -12,9 +12,11 @@ then use this lib like following:
     let ret = mdio_write![a_write, 1, 2, 3];
     println!("ret={:?}",ret);
 
-    fn a_read(dev:u16, reg:u16 )->u16 {
-        //replace following line with real reading of lan switch
-        dev+reg 
+    fn a_read(dev:u16, reg:u16, ret:&mut i32 )->u16 {
+        *ret=0;
+        dev+reg
     }
-    let ret = mdio_read![a_read, 1, 2, mv_6390_PORT_0x08];
-    println!("ret={:?}",ret);}
+    let mut ret=-1i32;
+    let ret = mdio_read_swap![a_read, 1, 2, mv_6390_PORT_0x08, &mut ret];
+    println!("ret={:?}",ret);
+
