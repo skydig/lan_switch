@@ -2,6 +2,7 @@
 lan switch register definition
 
 how to use?
+
 in your application, you should define mdio or other function which can read and write switch register,
 then use this lib like following:
 
