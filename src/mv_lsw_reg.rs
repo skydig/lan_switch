@@ -518,15 +518,15 @@ fn test_write_swap()
 #[test]
 fn test_write()
 {
-    fn a_write(dev:u16, reg:u16, val:u16 )->u16 {
-        dev+reg+val
+    fn a_write(dev:u16, reg:u16, val:u16 )->i32 {
+        (dev+reg+val) as i32
     }
     let ret = mdio_write![a_write, 1, 2, 3];
     println!("ret={:?}",ret);
 }
 #[macro_export]
 macro_rules! mdio_read {
-    ($func:ident, $dev:expr, $reg:expr, $t:ty, &mut $ret:ident) => (
+    ($t:ty, $func:ident, $dev:expr, $reg:expr, &mut $ret:ident) => (
         {
             let retv = $func($dev as u16,$reg as u16, &mut $ret);
             <$t>::try_from(retv)
@@ -535,7 +535,7 @@ macro_rules! mdio_read {
 }
 #[macro_export]
 macro_rules! mdio_read_swap {
-    ($func:ident, $dev:expr, $reg:expr, $t:ty, &mut $ret:ident) => (
+    ($t:ty,$func:ident, $dev:expr, $reg:expr,&mut $ret:ident) => (
         {
             let mut ret = $func($dev as u16,$reg as u16, &mut $ret);
             //swap ret
@@ -557,7 +557,7 @@ fn test_read_swap()
         dev+reg 
     }
     let mut ret=-1i32;
-    let retv = mdio_read_swap![a_read, 1, 2, mv_6390_PORT_0x08, &mut ret];
+    let retv = mdio_read_swap![mv_6390_PORT_0x08, a_read, 1, 2, &mut ret];
     println!("ret={:?},{}",retv, ret);
 }
 #[test]
@@ -568,6 +568,6 @@ fn test_read()
         dev+reg 
     }
     let mut ret=0i32;
-    let retv = mdio_read![a_read, 1, 2, mv_6390_PORT_0x08, &mut ret];
+    let retv = mdio_read![mv_6390_PORT_0x08, a_read, 1, 2, &mut ret];
     println!("ret={:?},{}",retv, ret);
 }
