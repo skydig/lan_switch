@@ -4,7 +4,7 @@
 use bit_struct::*; 
 use std::string::*;
 bit_struct! {
-    pub struct phy_reg_0x00(u16){
+   struct phy_reg_0x00(u16){
         reset:u1,
         internal_loopback:u1,
         speed_selection_13:u1,
