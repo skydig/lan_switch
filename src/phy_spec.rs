@@ -4,7 +4,7 @@
 use bit_struct::*; 
 use std::string::*;
 bit_struct! {
-    struct phy_mv_16d(u16){
+    pub struct phy_mv_16d(u16){
         DisableLinkPulses:u1,
         DownshiftCounter:u3,
         DownshiftEnable:u1,
@@ -17,7 +17,7 @@ bit_struct! {
         PolarityReversalDisable:u1,
         DisableJabber:u1,
     }
-    struct phy_mv_17d(u16){
+    pub struct phy_mv_17d(u16){
         Speed:u2,
         Duplex:u1,
         PageReceived:u1,
