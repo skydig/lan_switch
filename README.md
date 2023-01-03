@@ -13,11 +13,10 @@ then use this lib like following:
     let ret = mdio_write![a_write, 1, 2, 3];
     println!("ret={:?}",ret);
 
-    fn a_read(dev:u16, reg:u16, ret:&mut i32 )->u16 {
-        *ret=0;
-        dev+reg
+    fn a_read(dev:u16, reg:u16, ret:& mut i32)->u16 {
+        *ret=-1;
+        dev+reg 
     }
-    let mut ret=-1i32;
-    let ret = mdio_read_swap![a_read, 1, 2, mv_6390_PORT_0x08, &mut ret];
-    println!("ret={:?}",ret);
-
+    let mut ret=0i32;
+    let retv = mdio_read![mv_6390_PORT_0x08, a_read, 1, 2, &mut ret];
+    println!("ret={:?},{}",retv, ret);
