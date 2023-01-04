@@ -17,7 +17,7 @@ bit_struct! {
         speed_selection_6:u1,
         reserved:u6,
     }
-    pub struct phy_reg_0x01(u16){
+    struct phy_reg_0x01(u16){
         _100base_t4_cap:u1,
         _100base_x_f_d_cap:u1,
         _100base_x_h_d_cap:u1,
@@ -35,7 +35,7 @@ bit_struct! {
         jabber_detect:u1,
         extended_cap:u1,
     }
-    pub struct phy_reg_0x04(u16){
+    struct phy_reg_0x04(u16){
         next_page:u1,
         reserved:u1, //must be 0?
         remote_fault:u1,
@@ -49,7 +49,7 @@ bit_struct! {
         _10base_t_h_d_cap:u1,
         selector_field:u5, 
     }
-    pub struct phy_reg_0x09(u16){
+    struct phy_reg_0x09(u16){
         test_mode:u3,
         master_slave_configuration_enable:u1,
         master_slave_configuration_value:u1,
