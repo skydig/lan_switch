@@ -135,8 +135,8 @@ bit_struct! {
     }
 
     struct mv_6390_G1_1B_0x1F_ATU(u16){
-        StatsByte3:u8,
-        StatsByte2:u8,
+        StatsByte1:u8,
+        StatsByte0:u8,
     }
 
     struct mv_6390_G2_1C_0x05(u16){
