@@ -122,7 +122,7 @@ bit_struct! {
 
     struct mv_6390_G1_1B_0x1D_STAT(u16){
         StatsBusy:u1,
-        StatsOp:u2,
+        StatsOp:u3,
         Reserved:u1,
         StatsBank:u1,
         StatsPort:u5,
