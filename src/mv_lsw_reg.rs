@@ -120,6 +120,13 @@ bit_struct! {
         Byte5:u8
     }
 
+    struct mv_6390_G1_1B_0x1A_MGT(u16){
+        Update:u1,
+        Reserved:u1,
+        Pointer:u6,
+        Data:u8,
+    }
+
     struct mv_6390_G1_1B_0x1D_STAT(u16){
         StatsBusy:u1,
         StatsOp:u3,
