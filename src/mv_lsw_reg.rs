@@ -268,6 +268,13 @@ bit_struct! {
         DefQPri:u3,
     }
 
+    struct mv_6390_PORT_0x16(u16) {
+        Update:u1,
+        Pointer:u3,
+        Reserved:u1,
+        Data:u11,
+    }
+
     struct mv_6390_TCAMP_PAGE_Op(u16) {
         TCAMBusy:u1,
         TCAMOp:u3,
