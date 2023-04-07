@@ -275,7 +275,15 @@ bit_struct! {
         Data:u11,
     }
 
-    struct mv_6390_TCAM_PAGEX_Op(u16) {
+    struct mv_6390_TCAM_PAGE3_Op(u16) {
+        TCAMBusy:u1,
+        TCAMOp:u3,
+        TCAMPage:u2,
+        Reserved:u2,
+        TCAMEntry:u8,
+    }
+
+    struct mv_6390_TCAM_PAGE_Op(u16) {
         TCAMBusy:u1,
         TCAMOp:u3,
         TCAMPage:u2,
