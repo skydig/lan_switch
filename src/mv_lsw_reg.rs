@@ -278,7 +278,7 @@ bit_struct! {
     struct mv_6390_TCAM_PAGEX_Op(u16) {
         TCAMBusy:u1,
         TCAMOp:u3,
-        TCAMage:u2,
+        TCAMPage:u2,
         Reserved:u2,
         TCAMEntry:u8,
     }
