@@ -449,14 +449,6 @@ bit_struct! {
         HighHit:u8,
         LowHit:u8,
     }
-    struct mv_6390_TCAM_PAGE3_Op(u16) {
-        TCAMBusy:u1,
-        TCAMOp:u3,
-        TCAMage:u2,
-        Reserved:u2,
-        AMEntry:u8,
-    }
-
     struct mv_6390_TCAM_PAGE3_0x01(u16) {
         Reserved:u11,
         EgressPort:u5,
