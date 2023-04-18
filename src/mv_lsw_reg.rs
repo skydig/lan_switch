@@ -38,6 +38,23 @@ bit_struct! {
         Reserved:u6,
         SID:u6,
     }
+    struct mv_6390_G1_1B_0x04(u16){
+        SWReset:u1,
+        Reserved:u1,
+        DiscardExcessive:u1,
+        ARPwoBC:u1,
+        Reserved1:u2,
+        Reserved2:u1,
+        AVBIntEn:u1,
+        DevIntEn:u1,
+        StatsDoneIntEn:u1,
+        VTUProbIntEn:u1,
+        VTUDoneIntEn:u1,
+        ATUProbIntEn:u1,
+        ATUDoneIntEn:u1,
+        TCAMIntEn:u1,
+        EEIntEn:u1,
+    }
     struct mv_6390_G1_1B_0x05_VTU(u16){
         VB:u1,
         VTUOp:u3,
