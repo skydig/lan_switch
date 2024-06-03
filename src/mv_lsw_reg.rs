@@ -522,6 +522,14 @@ macro_rules! mdio_write {
         );
 }
 #[macro_export]
+macro_rules! mdio_write_c45 {
+    ($wfunc:ident, $mdio_dev:expr, $dev:expr, $reg:expr, $val:expr) => (
+        {
+            $wfunc($mdio_dev as u16, $dev as u16,$reg as u16, $val as u16)
+        }
+        );
+}
+#[macro_export]
 macro_rules! mdio_write_swap {
     ($wfunc:ident, $dev:expr, $reg:expr, $val:expr) => (
         {
@@ -560,6 +568,15 @@ macro_rules! mdio_read {
     ($t:ty, $func:ident, $dev:expr, $reg:expr, &mut $ret:ident) => (
         {
             let retv = $func($dev as u16,$reg as u16, &mut $ret);
+            <$t>::try_from(retv)
+        }
+    );
+}
+#[macro_export]
+macro_rules! mdio_read_c45 {
+    ($t:ty, $func:ident, $mdio_dev:expr, $dev:expr, $reg:expr, &mut $ret:ident) => (
+        {
+            let retv = $func($mdio_dev as u16, $dev as u16,$reg as u16, &mut $ret);
             <$t>::try_from(retv)
         }
     );
